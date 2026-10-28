@@ -1,0 +1,25 @@
+OBJETOS QUE ENCUENTRO EN CASA — Diccionario digital interactivo
+====================================================================
+
+FLUJO:  PORTADA  →  CAJA · LLAVE · RELOJ · TELÉFONO · MARCO  →  JUEGO  →  FINAL
+
+CÓMO ABRIRLO
+  Abre index.html en el navegador (o sube la carpeta a cualquier hosting).
+  No necesita instalación.
+
+DÓNDE VA CADA ARCHIVO
+  assets/img/portada.jpg        Imagen de presentación (también vale .png / .webp / .jpeg)
+  assets/video/caja.mp4    Video de la lección (4:3, ej. 960x720, sin audio)
+  assets/video/caja_card.mp4    Video del juego (cuadrado, ej. 480x480, liviano)
+  ... lo mismo para: llave, reloj, telefono, marco
+
+  Si falta la portada, se muestra una portada provisional.
+  Si falta el video de un objeto, ese objeto se omite automáticamente.
+
+CAMBIAR / AGREGAR OBJETOS
+  Todo está en un solo lugar: la lista ITEMS al inicio de js/main.js
+  (nombre, emoji, color, frase, pregunta del juego y nombres de los videos).
+
+PREPARAR VIDEOS (opcional, requiere ffmpeg)
+  ./preparar_videos.sh mi_video.mov caja
+  Genera caja.mp4 (960x720) y caja_card.mp4   (480x480), sin audio.

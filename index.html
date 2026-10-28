@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Objetos que encuentro en casa — Diccionario digital interactivo.">
+  <title>Objetos que encuentro en casa</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Ctext%20y='26'%20font-size='28'%3E🏠%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+<!-- Iconos reutilizables -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-speaker" viewBox="0 0 48 48">
+      <path d="M6 18h8l11-9v30l-11-9H6z" fill="currentColor"/>
+      <path d="M32 17c3.2 3.8 3.2 10.2 0 14M37.5 11.5c6 6.2 6 18.8 0 25" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-speaker-off" viewBox="0 0 48 48">
+      <path d="M6 18h8l11-9v30l-11-9H6z" fill="currentColor"/>
+      <path d="M33 18l10 12M43 18L33 30" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-replay" viewBox="0 0 48 48">
+      <path d="M38 24a14 14 0 1 1-4.5-10.3" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+      <path d="M36 5v11H25" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-house" viewBox="0 0 48 48">
+      <path d="M6 24L24 7l18 17" fill="none" stroke="#ff6b6b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M11 22v18h26V22L24 11z" fill="#ffd36b"/>
+      <rect x="20" y="28" width="9" height="12" rx="2" fill="#6c4bd1"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="app">
+
+  <!-- ====== Encabezado ====== -->
+  <header>
+    <h1 class="brand">
+      <span class="c-pink">OBJETOS</span> <span class="c-yellow">QUE</span> <span class="c-teal">ENCUENTRO</span> <span class="c-purple">EN CASA</span>
+    </h1>
+    <button id="sound" class="sound" aria-label="Desactivar voz" aria-pressed="true">
+      <svg class="ico ico-on"  aria-hidden="true"><use href="#i-speaker"/></svg>
+      <svg class="ico ico-off" aria-hidden="true"><use href="#i-speaker-off"/></svg>
+    </button>
+  </header>
+
+  <!-- ====== Tarjeta principal ====== -->
+  <section class="card">
+    <div class="layout">
+
+      <!-- ---- Escenario ---- -->
+      <div id="stage" class="stage">
+
+        <!-- Videos con transición suave (se crean desde JS) -->
+        <div id="slides" class="slides" role="img" aria-label="Imagen o video del objeto"></div>
+
+        <!-- Juego: tarjetas de video -->
+        <div id="gameGrid" class="game-grid" role="group" aria-label="Videos de objetos; toca el correcto" hidden></div>
+
+        <!-- Celebración -->
+        <div id="celebration" class="celebration" hidden><span>★ ✦ ★</span></div>
+      </div>
+
+      <!-- ---- Panel de contenido textual ---- -->
+      <div class="copy">
+
+        <!-- Bienvenida (de fondo: video en bucle, sin sonido) -->
+        <div id="welcome">
+          <span class="badge"><span class="c-pink">MIRAMOS</span> • <span class="c-yellow">ESCUCHAMOS</span> • <span class="c-teal">JUGAMOS</span></span>
+          <h1>OBJETOS<br>QUE ENCUENTRO<br>EN CASA</h1>
+          <p>Descubrimos los objetos que encontramos en casa y para qué los usamos todos los días</p>
+          <div class="actions">
+            <button id="start" class="primary">EMPEZAR ▶</button>
+          </div>
+        </div>
+
+        <!-- Lección -->
+        <div id="lesson" hidden>
+          <span class="eyebrow"><span class="c-pink">CONOZCO</span> <span class="c-yellow">MIS</span> <span class="c-teal">OBJETOS</span></span>
+          <h2 id="word">CAJA</h2>
+          <p id="phrase"></p>
+          <div id="lessonIcon" class="lesson-icon" hidden></div>
+          <button id="listen" class="listen" type="button">¡MIRA Y ESCUCHA! 🔊</button>
+          <div id="dots" class="progress" aria-hidden="true"></div>
+          <span id="count" class="badge"></span>
+        </div>
+
+        <!-- Juego -->
+        <div id="game" hidden>
+          <span class="eyebrow"><span class="c-pink">JUGAMOS</span> <span class="c-teal">JUNTOS</span></span>
+          <h2>¿QUIÉN ES?</h2>
+          <p id="question"></p>
+          <p id="feedback" class="answer" aria-live="polite">👆 TOCA EL VIDEO</p>
+          <span id="gameCount" class="badge"></span>
+        </div>
+
+        <!-- Finalización -->
+        <div id="finish" hidden>
+          <div class="finish-stars" aria-hidden="true">★ ✦ ★</div>
+          <h1>¡EXCELENTE TRABAJO!</h1>
+          <p>¡Ya conoces los objetos que encuentras en casa!</p>
+          <div class="actions">
+            <button id="again" class="primary">↻ VOLVER A JUGAR</button>
+            <button id="dictionary" class="secondary">REGRESAR AL DICCIONARIO</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Controles (debajo de la tarjeta) ====== -->
+  <nav id="controls" class="footer" aria-label="Controles del diccionario" hidden>
+    <button id="home" class="btn-home"><svg class="ico" aria-hidden="true"><use href="#i-house"/></svg> INICIO</button>
+    <button id="prev" class="btn-prev">← ANTERIOR</button>
+    <button id="repeat" class="btn-repeat"><svg class="ico" aria-hidden="true"><use href="#i-replay"/></svg> REPETIR</button>
+    <button id="next" class="primary btn-next">SIGUIENTE →</button>
+  </nav>
+
+  <p id="status" class="status" role="status"></p>
+  <noscript>ACTIVA JAVASCRIPT PARA JUGAR.</noscript>
+
+</main>
+
+<script src="./js/main.js"></script>
+</body>
+</html>
